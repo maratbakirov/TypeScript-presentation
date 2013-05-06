@@ -1,0 +1,115 @@
+﻿body {
+    font-size: .85em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    color: #232323;
+    background-color: #fff;
+}
+
+header, footer, nav, section {
+    display: block;
+}
+
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 75px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+
+/***SM***/
+.row .title {
+    background-color: #0044cc;
+    color: #ffffff;
+    padding-left: 10px;
+    margin-left: 0px;
+}
+
+.box-section{
+    /*padding-left: 20px;*/
+    margin-left: 0px;
+    border: 2px solid #0044cc
+}
+
+.box-section .row{
+    /*margin-left: -20px;*/
+}
+
+form fieldset{
+    /*margin-left: 20px;*/
+}
+
+form fieldset label {
+    font-weight: bold;
+}
+
+.input-row{
+    margin-top: 10px;
+    margin-left: 0px;
+    padding-left: 4px;
+}
+
+.btn-edit{
+    margin: 5px;
+}
+
+.item-row{
+    margin-left: 0px;
+}
+
+.item-row:hover{
+    background-color: #d9edf7;
+}
+
+.activeDrill{
+    background-color: #dff0d8;
+}
+
+.container-list{
+    margin-left: 0px;
+}
+/***END SM***/

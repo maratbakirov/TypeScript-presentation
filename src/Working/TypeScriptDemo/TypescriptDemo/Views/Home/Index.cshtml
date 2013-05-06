@@ -1,0 +1,47 @@
+﻿<div id="main-content">
+
+    <div class="row">
+
+        <div id="tagsList" class="span5 box-section">
+            <div class="row title">
+                <h4>Tags</h4>
+            </div>
+            <div class="row input-append input-row">
+                <input type="text" placeholder="Add New Tag" data-bind="value: tagToAdd" />
+                <button type="submit" class="btn btn-primary" data-bind="click: addTag"><i class="icon-plus icon-white"></i> Add</button>
+            </div>
+
+            <div class="row container-list" data-bind="foreach: tags">
+                <div class="row item-row" data-bind="click: $parent.selectTag">
+                    <div class="span2" data-bind="text: name"></div>
+                     <div class="span2">
+                        <a href="#" data-toggle="modal" data-target="#tagDialog" role="button"><i class="icon-edit"></i> Edit</a>
+                        <a href="#" data-bind="click: $parent.deleteTag"><i class="icon-remove"></i> Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div><!--end tags box-->
+
+
+        <div id="tagDialog" class="modal hide fade" role="dialog" data-backdrop="static" data-bind="with: selectedTag">
+            <div class="modal-header">
+                <h3>Tag Name:</h3>
+            </div>
+            <div class="modal-body">
+                <input type="text" data-bind="value: name" />
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true" data-bind="click: $parent.editTagCancel">Cancel</button>
+                <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" data-bind="click: $parent.editTagSave">Save</button>
+            </div>
+        </div>
+
+    </div><!--outer row-->
+
+
+</div>
+
+@section scripts {
+    @*@Scripts.Render("~/bundles/app")*@
+    <script src="@Url.Content("~/Scripts/require.js")" type="text/javascript" data-main="/app/main"></script>
+}

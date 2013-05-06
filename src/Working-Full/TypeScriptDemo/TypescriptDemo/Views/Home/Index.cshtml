@@ -1,0 +1,111 @@
+﻿<div id="main-content">
+    <div class="row">
+
+        <div id="tagsList" class="span5 box-section" data-bind="with: tagsViewModel">
+            <div class="row title">
+                <h4>Tags</h4>
+            </div>
+            <div class="row input-append input-row">
+                <input type="text" placeholder="Add New Tag" data-bind="value: tagToAdd" />
+                <button type="submit" class="btn btn-primary" data-bind="click: addTag"><i class="icon-plus icon-white"></i> Add</button>
+            </div>
+
+            <div class="row container-list" data-bind="foreach: tags">
+                <div class="row item-row" data-bind="click: $parent.selectTag">
+                    <div class="span2" data-bind="text: name"></div>
+                     <div class="span2">
+                        <a href="#" data-toggle="modal" data-target="#tagDialog" role="button"><i class="icon-edit"></i> Edit</a>
+                        <a href="#" data-bind="click: $parent.deleteTag"><i class="icon-remove"></i> Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div><!--end tags box-->
+
+        <div id="tagDialog" class="modal hide fade" role="dialog" data-backdrop="static" data-bind="with: tagsViewModel.selectedTag">
+            <div class="modal-header">
+                <h3>Tag Name:</h3>
+            </div>
+            <div class="modal-body">
+                <input type="text" data-bind="value: name" />
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true" data-bind="click: $parent.tagsViewModel.editTagCancel">Cancel</button>
+                <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" data-bind="click: $parent.tagsViewModel.editTagSave">Save</button>
+            </div>
+        </div>
+
+
+         <div id="drillsList" class="span4 box-section">
+            <div class="row title">
+                <h4 data-bind="text: tagsViewModel.selectedTag().name() + ' Drills'"></h4>
+            </div>
+            <div class="row input-append input-row">
+                <input id="newDrill" type="text" placeholder="Add New Drill" data-bind="value: drillsViewModel.drillToAdd, valueUpdate: 'afterkeydown'" />
+                <button type="submit" class="btn btn-primary" data-bind="click: drillsViewModel.addDrill, enable: drillsViewModel.drillToAdd().length > 0"><i class="icon-plus icon-white"></i> Add</button>
+            </div>
+
+            <div class="row container-list" data-bind="foreach: drillsViewModel.drills">
+                <div class="row item-row" data-bind="click: $parent.drillsViewModel.drillClick, css: { activeDrill: $parent.drillsViewModel.clickedDrill() === $data }, event: { mouseover: $parent.drillsViewModel.drillMouseOver, mouseout: $parent.drillsViewModel.drillMouseOut }">
+                    <div class="span2" data-bind="text: name"></div>
+                    <div class="span1">
+                        <a href="#" data-bind="click: $parent.drillsViewModel.deleteDrill"><i class="icon-remove"></i> Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div><!--end drills box-->
+
+
+        <div id="drillDetail" class="span3 box-section" data-bind="with: drillsViewModel.selectedDrill">
+            <div class="row title ">
+                <div class="pull-left">
+                    <h4 data-bind="text: 'Drill: ' + name()"></h4>
+                </div>
+                <div class="pull-right">
+                    <button class="btn btn-small btn-edit btn-success" data-bind="click: $parent.drillsViewModel.editDrill"><i class="icon-edit"></i> Edit</button>
+                </div>
+            </div>
+
+            <div class="row container-list">
+                <form>
+                    <fieldset>
+                        <legend></legend>
+
+                        <label>Name:</label>
+                        <input type="text" data-bind="value: name, visible: $parent.drillsViewModel.useDrillEditTemplate" />
+                        <span data-bind="text: name, visible: !$parent.drillsViewModel.useDrillEditTemplate()"></span>
+
+
+                        <label>Description:</label>
+                        <input type="text" data-bind="value: description, visible: $parent.drillsViewModel.useDrillEditTemplate" />
+                        <span data-bind="text: description, visible: !$parent.drillsViewModel.useDrillEditTemplate()"></span>
+
+
+                        <label>Link:</label>
+                        <input type="text" data-bind="value: url, visible: $parent.drillsViewModel.useDrillEditTemplate" />
+                        <!-- ko ifnot: $parent.drillsViewModel.useDrillEditTemplate -->
+                        <a href="#" data-bind="visible: url, text: name, attr: { href: url }" target="_blank"></a>
+                        <span data-bind="visible: !url()">(None)</span>
+                        <!-- /ko -->
+
+                        <label>Tag:</label>
+                        <select data-bind="options: $parent.tagsViewModel.tags, optionsText: 'name', optionsValue: 'id', value: tagId, visible: $parent.drillsViewModel.useDrillEditTemplate"></select>
+                        <span data-bind="text: $parent.tagsViewModel.tagNameFor(tagId()), visible: !$parent.drillsViewModel.useDrillEditTemplate()"></span>
+
+                         <!-- ko if: $parent.drillsViewModel.useDrillEditTemplate -->
+                        <div class="control-group">
+                            <button class="btn btn-primary" data-bind="click: $parent.drillsViewModel.saveDrill">Save</button>
+                            <button class="btn" data-bind="click: $parent.drillsViewModel.cancelDrillEdit">Cancel</button>
+                        </div>
+                        <!-- /ko -->
+                    </fieldset>
+                </form>
+            </div><!--end row container-list-->
+        </div><!--end drill details box-->
+
+    </div><!--outer row-->
+</div><!--end main-content-->
+
+@section scripts {
+    @*@Scripts.Render("~/bundles/app")*@
+    <script src="@Url.Content("~/Scripts/require.js")" type="text/javascript" data-main="/app/main"></script>
+}

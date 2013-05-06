@@ -1,0 +1,7 @@
+﻿@{
+    var jsFile = "/App/test/" + Request.QueryString["id"] + ".js";
+}
+
+<h2>TypeScript Test Page - @jsFile</h2>
+
+<script src="@jsFile"></script>
